@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 import classNames from "classnames";
 
@@ -15,11 +15,29 @@ export enum ButtonType {
 }
 
 interface BaseButtonProps {
+  /**
+   * className
+   */
   className?: string;
+  /**
+   * Boolean indicating whether the button should render as disabled
+   */
   disabled?: boolean;
+  /**
+   * 大小
+   */
   size?: ButtonSize;
+  /**
+   * 类型
+   */
   btnType?: ButtonType;
+  /**
+   * 元素
+   */
   children: React.ReactNode;
+  /**
+   * 链接
+   */
   href?: string;
 }
 
@@ -31,7 +49,10 @@ type AnchorButtonProps = BaseButtonProps &
 
 export type ButtonProps = Partial<AnchorButtonProps & NativeButtonProps>;
 
-const Button = (props: ButtonProps) => {
+/**
+ * Button component description
+ */
+const Button: FC<ButtonProps> = (props) => {
   const { disabled, size, btnType, children, href, className, ...rest } = props;
   const cls = classNames("btn", className, {
     [`btn-${btnType}`]: btnType,
@@ -51,10 +72,4 @@ const Button = (props: ButtonProps) => {
     </button>
   );
 };
-
-Button.defaultProps = {
-  btnType: ButtonType.Default,
-  disabled: false,
-};
-
 export default Button;
