@@ -1,6 +1,6 @@
 {
   "name": "@dot-design/react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -23,14 +23,17 @@
   "scripts": {
     "start": "react-scripts start",
     "clean": "rimraf ./dist",
+    "lint": "eslint --ext js,ts,tsx src --max-warnings 5",
     "build": "npm run clean && npm run build-ts && npm run build-css",
     "test": "react-scripts test",
+    "test:nowatch": "cross-env CI=true react-scripts test",
     "eject": "react-scripts eject",
     "build-ts": "tsc -p tsconfig.build.json",
     "build-css": "node-sass ./src/styles/index.scss ./dist/index.css",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run test:nowatch && npm run lint && npm run build",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -61,8 +64,8 @@
     ]
   },
   "peerDependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
   "dependencies": {
     "react": "^17.0.2",
@@ -84,7 +87,9 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "classnames": "^2.3.1",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.5.1",
+    "husky": "^7.0.0",
     "node-sass": "^6.0.1",
     "react-scripts": "4.0.3",
     "rimraf": "^3.0.2",

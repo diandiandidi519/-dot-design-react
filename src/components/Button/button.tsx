@@ -72,4 +72,8 @@ const Button: FC<ButtonProps> = (props) => {
     </button>
   );
 };
+Button.defaultProps = {
+  disabled: false,
+  btnType: ButtonType.Default,
+};
 export default Button;
