@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-// must daxie
+// 必须大写，不然文档出不来
 import Button, { ButtonSize, ButtonType } from "./Button";
 import "../../styles/index.scss";
 
